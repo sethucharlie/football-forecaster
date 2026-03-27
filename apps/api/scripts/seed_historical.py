@@ -2,8 +2,16 @@ import os
 import asyncio
 import aiohttp
 import understat
+from pathlib import Path
 from datetime import datetime
 from sqlalchemy import create_engine, text
+from dotenv import load_dotenv
+
+# For local development: try to load from .env in the root directory
+try:
+    load_dotenv(dotenv_path=".env")
+except:
+    pass
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 assert DATABASE_URL, "DATABASE_URL not found in .env"

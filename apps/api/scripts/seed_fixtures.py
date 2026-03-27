@@ -1,8 +1,16 @@
 import os
 import time
 import requests
+from pathlib import Path
 from datetime import datetime
 from sqlalchemy import create_engine, text
+from dotenv import load_dotenv
+
+# For local development: try to load from .env in the root directory
+try:
+    load_dotenv(dotenv_path=".env")
+except:
+    pass
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 FOOTBALL_DATA_KEY = os.getenv("FOOTBALL_DATA_KEY")
