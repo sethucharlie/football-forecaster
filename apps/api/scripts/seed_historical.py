@@ -27,7 +27,7 @@ async def seed_season(conn, season):
         "SELECT id FROM leagues WHERE code = 'EPL'"
     )).scalar()
 
-    connector = aiohttp.TCPConnector(use_dns_cache=False, family= 0)
+    connector = aiohttp.TCPConnector(use_dns_cache=False, family= 0) # type: ignore
     async with aiohttp.ClientSession(connector=connector) as session:
         u = understat.Understat(session)
         matches = await u.get_league_results("EPL", season)

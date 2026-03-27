@@ -1,11 +1,10 @@
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from typing import Any
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from app.db import get_db
 from app.services.pricing import (
-    mock_model_probability,
     implied_probability_from_odds,
     compute_edge,
     compute_ev_decimal_odds,
@@ -25,7 +24,7 @@ router = APIRouter(prefix="/predictions", tags=["predictions"])
 @router.post("/generate")
 def generate_predictions(
     league: str = "EPL",
-    model_version: str = "mock_v1",
+    model_version: str = "poisson_v1",
     db: Session = Depends(get_db),
 ):
     """
@@ -57,7 +56,9 @@ def generate_predictions(
     if not rows:
         return {"inserted": 0, "message": "No scheduled matches with odds found."}
 
-    now = datetime.now(timezone.utc)
+
+    SAST = timezone(timedelta(hours=2))
+    now = datetime.now(SAST)
     inserted = 0
 
     # 2) Insert predictions
