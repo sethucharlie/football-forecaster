@@ -1,0 +1,36 @@
+name: Seed Data
+
+on:
+  schedule:
+    - cron: '0 5 * * 1'
+    - cron: '0 5 * * 3'
+    - cron: '0 5 * * 5'
+  workflow_dispatch:
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          cd apps/api
+          pip install -r requirements.txt
+          pip install understat --no-deps
+
+      - name: Run fixtures seeder
+        run: |
+          cd apps/api
+          python scripts/seed_fixtures.py
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
