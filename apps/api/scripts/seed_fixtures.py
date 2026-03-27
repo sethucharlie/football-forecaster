@@ -1,14 +1,8 @@
 import os
 import time
 import requests
-from pathlib import Path
 from datetime import datetime
 from sqlalchemy import create_engine, text
-from dotenv import load_dotenv
-
-env_path = Path(__file__).parent.parent / ".env"
-if env_path.exists():
-    load_dotenv(dotenv_path=env_path)
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 FOOTBALL_DATA_KEY = os.getenv("FOOTBALL_DATA_KEY")
