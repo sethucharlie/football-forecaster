@@ -7,18 +7,16 @@ from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
 
 # For local development: try to load from .env in the root directory
-try:
+if Path(".env").exists():
     load_dotenv(dotenv_path=".env")
-except:
-    pass
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 FOOTBALL_DATA_KEY = os.getenv("FOOTBALL_DATA_KEY")
 ODDS_API_KEY = os.getenv("ODDS_API_KEY")
 
-assert DATABASE_URL, "DATABASE_URL not found in .env"
-assert FOOTBALL_DATA_KEY, "FOOTBALL_DATA_KEY not found in .env"
-assert ODDS_API_KEY, "ODDS_API_KEY not found in .env"
+assert DATABASE_URL, "DATABASE_URL not found in environment variables"
+assert FOOTBALL_DATA_KEY, "FOOTBALL_DATA_KEY not found in environment variables"
+assert ODDS_API_KEY, "ODDS_API_KEY not found in environment variables"
 
 engine = create_engine(DATABASE_URL)
 
