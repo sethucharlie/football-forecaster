@@ -30,7 +30,7 @@ jobs:
         run: |
           cd apps/api
           python scripts/seed_historical.py
-          env:
+        env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
