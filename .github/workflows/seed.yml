@@ -8,6 +8,10 @@ on:
   workflow_dispatch:
 
 jobs:
+  -name: Debug environment
+    run: |
+      echo "DATABASE_URL is set: ${{ secrets.DATABASE_URL != '' }}"
+      python -c "import os; print('DB:', os.getenv('DATABASE_URL', 'NOT FOUND')[:20])"
   seed:
     runs-on: ubuntu-latest
     
