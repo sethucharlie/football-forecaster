@@ -7,14 +7,10 @@ on:
     - cron: '0 5 * * 5'
   workflow_dispatch:
 
-jobs:
+
+  jobs:
   seed:
     runs-on: ubuntu-latest
-    
-    env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
-      ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
     
     steps:
       - name: Checkout code
@@ -35,8 +31,11 @@ jobs:
         run: |
           python -c "import os; print('DB:', os.getenv('DATABASE_URL', 'NOT FOUND')[:20])"
 
-
       - name: Run fixtures seeder
         run: |
           cd apps/api
           python scripts/seed_fixtures.py
+        env:  # ← Step level (this will work)
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
