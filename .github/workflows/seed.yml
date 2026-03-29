@@ -31,7 +31,7 @@ jobs:
           pip install -r requirements.txt
           pip install understat --no-deps
 
-       -name: Debug environment
+      - name: Debug environment
         run: |
           python -c "import os; print('DB:', os.getenv('DATABASE_URL', 'NOT FOUND')[:20])"
 
