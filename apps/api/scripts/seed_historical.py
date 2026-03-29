@@ -103,6 +103,11 @@ async def main():
     print("Starting historical seed...")
 
     with engine.connect() as conn:
+        count = conn.execute(text("SELECT COUNT(*) FROM matches")).scalar()
+        if count is not None and count > 0:
+            print(f"Database already has {count} matches - skipping historical seed")
+            return
+
         seed_league(conn)
 
         for season in SEASONS:
