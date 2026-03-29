@@ -30,6 +30,11 @@ jobs:
         run: |
           cd apps/api
           python scripts/seed_fixtures.py
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+
       - name: Debug environment
         run: |
           if [ -z "$DATABASE_URL" ]; then
@@ -40,5 +45,9 @@ jobs:
           fi
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
-          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+
+      - name: Show database URL
+        run: |
+          echo $DATABASE_URL
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
