@@ -60,6 +60,8 @@ def upcoming_with_odds(
           l.code AS league,
           ht.name AS home_team,
           at.name AS away_team,
+          m.home_team_id,
+          m.away_team_id,
           m.kickoff_utc,
           m.status,
           om.market,
