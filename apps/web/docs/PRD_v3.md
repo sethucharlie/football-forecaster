@@ -308,13 +308,13 @@ Must be centered, with grey text.
 Never use raw market codes (OU_25_OVER) in UI.
 Never hardcode league code anywhere in text.
 Never assume API returns data.
-Never use Pages Router.
+Never use file-based routing (no Next.js).
 Never use localStorage.
 Never show lambda values in Simple mode.
 Never change color tokens.
 
 ### ALWAYS:
-Always use useLeague() for league.
+Always use react-router-dom for navigation.
 Always handle empty/error states.
 Always use en-ZA formatting.
 Always show “Last updated”.

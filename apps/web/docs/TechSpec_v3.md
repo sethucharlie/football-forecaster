@@ -1,7 +1,7 @@
 # Football Forecaster — Technical Specification (v3)
 
 ## 1. Tech Stack
-- Framework: **Next.js 14 App Router**
+- Framework: **React (Create React App) + react-router-dom**
 - Styling: **TailwindCSS**
 - Charts: **Recharts**
 - HTTP Client: **Axios**
@@ -14,18 +14,17 @@
 ## 2. Folder Structure
 
 ```text
-apps/web/
-  app/
-    layout.js
-    page.js
-    performance/
-      page.js
-    predictions/
-      page.js
-    paper-bets/
-      page.js
-    how-it-works/
-      page.js
+apps/web/src/
+  App.js              ← Root component with React Router
+  index.js            ← Entry point
+  index.css           ← Global styles + tokens
+
+  pages/
+    ValueBets.js      ← Route: /
+    Performance.js    ← Route: /performance
+    Predictions.js    ← Route: /predictions
+    PaperBets.js      ← Route: /paper-bets
+    HowItWorks.js     ← Route: /how-it-works
 
   components/
     cards/
@@ -47,6 +46,8 @@ apps/web/
       EdgeBadge.js
       EVBadge.js
       RefreshButton.js
+    layout/
+      Layout.js        ← Shared layout wrapper (Navbar + Footer)
     navigation/
       Navbar.js
       LeagueSelector.js
@@ -60,10 +61,7 @@ apps/web/
     leagues.js
     types.js (based on JSON schemas)
 
-  public/
-    styles/
-      tokens.css
-  .env.local
+  .env
 ```
 
 ---
@@ -71,7 +69,7 @@ apps/web/
 ## 3. Environment Variables
 
 ```env
-NEXT_PUBLIC_API_URL=https://football-forecaster.onrender.com
+REACT_APP_API_URL=https://football-forecaster.onrender.com
 ```
 
 ---
@@ -179,8 +177,8 @@ Never:
 
 ## 11. Antigravity Agent Rules
 
-- **Architect Agent**: Owns folder structure, ensures all constraints followed, approves UI consistency
-- **Frontend Engineer Agent**: Implements pages + components strictly to PRD
+- **Architect Agent**: Owns folder structure (React CRA + react-router-dom), ensures all constraints followed, approves UI consistency
+- **Frontend Engineer Agent**: Implements pages + components strictly to PRD using React Router for navigation
 - **UI/UX Agent**: Enforces spacing, color tokens, card/table consistency
 - **API Integration Agent**: Ensures responses match JSON schemas
 - **QA Agent**: Tests error, loading, empty states, tests mobile + desktop layouts
